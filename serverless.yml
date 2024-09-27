@@ -1,0 +1,81 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: linneasj
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: aws-individual-examination
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+            - dynamodb:DeleteItem
+            - dynamodb:UpdateItem
+          Resource: "*"
+          
+package:
+  individually: true
+
+functions:
+  postMessage:
+    handler: functions/postMessage/index.handler
+    events:
+      - httpApi:
+          path: "/api/message"
+          method: POST
+          cors:
+            allowOrigins:
+              - '*'  # Tillåt alla ursprung
+
+  getAllMessages:
+    handler: functions/getAllMessages/index.handler
+    events:
+      - httpApi:
+          path: "/api/messages"
+          method: GET
+          cors:
+            allowOrigins:
+              - '*'  # Tillåt alla ursprung
+
+  updateMessage:
+    handler: functions/updateMessage/index.handler
+    events:
+      - httpApi:
+          path: "/api/message/{id}"
+          method: PUT
+          cors:
+            allowOrigins:
+              - '*'  # Tillåt alla ursprung
+
+  deleteMessage:
+    handler: functions/deleteMessage/index.handler
+    events:
+      - httpApi:
+          path: "/api/message/{id}"
+          method: DELETE
+          cors:
+            allowOrigins:
+              - '*'  # Tillåt alla ursprung
+
+
+
+resources:
+  Resources:
+    messageDb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: message-db
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

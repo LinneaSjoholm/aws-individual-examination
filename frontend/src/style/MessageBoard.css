@@ -1,0 +1,35 @@
+/* src/style/MessageBoard.css */
+
+/* Styla tidsstämpeln överst i meddelandet */
+.timestamp {
+    display: block;
+    font-size: 12px; /* Mindre font */
+    color: #888;     /* Ljusare färg */
+    margin-bottom: 5px; /* Mellanrum under tidsstämpeln */
+  }
+
+  .message-board ul {
+    list-style: none; /* Tar bort punkterna från listan */
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  .message-board li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .message-board li:nth-child(even) {
+    background-color: #f1f1f1;
+  }
+  
+  .message-board li span {
+    font-weight: bold;
+    color: #333;
+  }
+  
