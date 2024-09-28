@@ -4,7 +4,7 @@ import { db } from '../../services/db.js';
 export async function handler(event, context) {
   try {
 
-    // Get the message id
+    
     const messageId = event.pathParameters.id;
 
     const getMessage = await db
@@ -16,12 +16,12 @@ export async function handler(event, context) {
       })
       .promise();
 
-    // Control that the message exists
+    
     if (!getMessage.Item) {
       return sendError(404, { success: false, message: "Message not found" });
     }
 
-    // Remove the message
+    
     await db
       .delete({
         TableName: "message-db",

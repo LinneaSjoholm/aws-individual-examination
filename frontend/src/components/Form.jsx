@@ -17,12 +17,12 @@ const Form = ({ onNewMessage }) => {
             const newMessage = {
                 username,
                 message: tip,
-                createdAt: new Date().toISOString(), // Se till att tidsstämpeln skapas här
+                createdAt: new Date().toISOString(),
             };
 
-            await onNewMessage(newMessage); // Anropa onNewMessage med det nya meddelandet
+            await onNewMessage(newMessage);
 
-            // Rensa formuläret
+            
             setUsername('');
             setTip('');
         } catch (error) {

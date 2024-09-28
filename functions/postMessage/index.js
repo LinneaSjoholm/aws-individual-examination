@@ -31,12 +31,12 @@ export const handler = async (event) => {
         return sendError(400, { error: 'Message is required.' });
     }
 
-    // Skapa ett nytt meddelandeobjekt
+    
     const newMessage = {
         id: id,
         username,
         message,
-        createdAt: new Date().toISOString(), // Tidsstämpel i ISO-format
+        createdAt: new Date().toISOString(),
     };
 
     try {
@@ -49,10 +49,10 @@ export const handler = async (event) => {
         return sendError(500, { success: false, message: "Failed to post message to the database" });
     }
 
-    // Returnera meddelandeinformation och bekräftelsesvar
+    
     return sendResponse(200, {
         success: true,
         username: username,
-        message: newMessage, // Skicka tillbaka det nya meddelandet inklusive tidsstämpel
+        message: newMessage,
     });
 };

@@ -1,35 +1,146 @@
-/* src/style/MessageBoard.css */
+body {
+  margin: 0;
+  background-color: #E5E5E5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  height: 100vh;
+}
 
-/* Styla tidsstämpeln överst i meddelandet */
+.title {
+  color: white;
+}
+
+.message-board {
+  background-color: #edf2f4;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  gap: 25px;
+}
+
+h1.messageBoard-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto; 
+  width: 100%;
+}
+
+li {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 15px auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+li .button-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+li button {
+  width: auto;
+  padding: 8px 16px;
+}
+
+button {
+  background-color: #14213D;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #FCA311;
+  color: #2b2d42;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: none;
+}
+
 .timestamp {
-    display: block;
-    font-size: 12px; /* Mindre font */
-    color: #888;     /* Ljusare färg */
-    margin-bottom: 5px; /* Mellanrum under tidsstämpeln */
-  }
+  color: #FCA311;
+  font-size: 0.9rem;
+}
 
-  .message-board ul {
-    list-style: none; /* Tar bort punkterna från listan */
-    padding: 0;
-    margin: 0;
-  }
-  
-  
-  .message-board li {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    
-  }
-  
-  .message-board li:nth-child(even) {
-    background-color: #f1f1f1;
-  }
-  
-  .message-board li span {
-    font-weight: bold;
-    color: #333;
-  }
-  
+span {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: none;
+}
+
+
+.modal {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.modal p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background-color: #dc3545;
+  box-shadow: none;
+}
+
+.modal button:last-child {
+  background-color: #28a745;
+  box-shadow: none;
+}
+
+.modal button:hover {
+  background-color: #c82333;
+  box-shadow: none;
+}
+
+.modal button:last-child:hover {
+  background-color: #218838;
+  box-shadow: none;
+}

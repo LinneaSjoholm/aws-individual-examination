@@ -6,13 +6,13 @@ export async function handler(event, context) {
     let newMessage;
 
     try {
-        const body = JSON.parse(event.body); // Parse the request body
-        newMessage = body.message; // Get the new message text from the request body
+        const body = JSON.parse(event.body);
+        newMessage = body.message;
     } catch (error) {
         return {
             statusCode: 400,
             headers: {
-                "Access-Control-Allow-Origin": "*", // Byt till din specifika domän för produktion
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT"
             },
@@ -20,12 +20,12 @@ export async function handler(event, context) {
         };
     }
 
-    // Validate the input
+    
     if (!newMessage) {
         return {
             statusCode: 400,
             headers: {
-                "Access-Control-Allow-Origin": "*", // Byt till din specifika domän för produktion
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT"
             },
@@ -34,22 +34,22 @@ export async function handler(event, context) {
     }
 
     try {
-        // Get the existing message to ensure it exists
+        
         const getMessage = await db
             .get({
                 TableName: 'message-db',
                 Key: {
-                    id: messageId, // Use the ID to find the message
+                    id: messageId,
                 },
             })
             .promise();
 
-        // If the message doesn't exist, return an error
+        
         if (!getMessage.Item) {
             return {
                 statusCode: 404,
                 headers: {
-                    "Access-Control-Allow-Origin": "*", // Byt till din specifika domän för produktion
+                    "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT"
                 },
@@ -57,26 +57,26 @@ export async function handler(event, context) {
             };
         }
 
-        // Update the message in the database
+        
         await db
             .update({
                 TableName: 'message-db',
                 Key: { 
                     id: messageId 
-                }, // Key for the message to update
-                UpdateExpression: 'set message = :newMessage, updatedAt = :updatedAt', // Update the message and set an updated timestamp
+                }, 
+                UpdateExpression: 'set message = :newMessage, updatedAt = :updatedAt',
                 ExpressionAttributeValues: {
                     ':newMessage': newMessage,
                     ':updatedAt': new Date().toISOString(),
                 },
-                ReturnValues: 'ALL_NEW', // Return the updated values
+                ReturnValues: 'ALL_NEW',
             })
             .promise();
 
         return {
             statusCode: 200,
             headers: {
-                "Access-Control-Allow-Origin": "*", // Byt till din specifika domän för produktion
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT"
             },
@@ -86,11 +86,11 @@ export async function handler(event, context) {
             }),
         };
     } catch (error) {
-        console.error('Error updating message:', error); // Log the error
+        console.error('Error updating message:', error);
         return {
             statusCode: 500,
             headers: {
-                "Access-Control-Allow-Origin": "*", // Byt till din specifika domän för produktion
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT"
             },
